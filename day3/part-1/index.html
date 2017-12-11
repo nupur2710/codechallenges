@@ -1,0 +1,79 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+  <form>
+    Number: <textarea type="text" name="fname"></textarea><br>
+    <button value="Submit">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        compare($("textarea").val());
+
+      });
+    });
+
+    function compare(input) {
+      var boxNumber, distance;
+      var start = 0;
+
+      var inputChar = Number(input);
+      console.log("input character " + inputChar);
+
+      //find the box number
+      var root = Math.ceil(Math.sqrt(inputChar));
+      if (root % 2 === 0) {
+        boxNumber = root + 1
+      } else {
+        boxNumber = root;
+      }
+      boxNumber = (boxNumber - 1) / 2
+
+      console.log("boxnumber " + boxNumber);
+
+      //count max steps
+      var a = Math.pow(boxNumber * 2 + 1, 2);
+
+      //a is the highest number in the box
+      console.log("highest number " + a);
+
+      //this is the maxDistance
+      distance = 2 * boxNumber;
+      maxDistance = distance;
+
+      var decrement = true;
+      for (var i = a; i > inputChar; i--) {
+        if (decrement) {
+          distance = distance - 1;
+        }
+        else {
+          distance = distance + 1;
+        }
+
+        if (distance === boxNumber) {
+          decrement = false;
+        }
+        if (distance === maxDistance) {
+          decrement = true;
+        }
+
+        if (i === inputChar) {
+          break;
+        }
+      }
+
+      window.alert("distance " + distance);
+
+    }
+  </script>
+
+</body>
+
+</html>
