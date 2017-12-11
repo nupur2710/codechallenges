@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+  <form>
+    Number: <input type="text" name="fname"><br>
+    <button value="Submit">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        compare($("input:text").val());
+
+      });
+    });
+
+    function compare(input) {
+
+      var sum = 0;
+      var half = input.length / 2;
+      var j = 0;
+      for (var i = 0; i < half; i++) {
+
+
+        if (input.charAt(i) === input.charAt(half + i)) {
+          sum = sum + Number(input.charAt(i));
+        };
+      }
+
+      for (i = half; i < input.length; i++) {
+        if (input.charAt(i) === input.charAt(j)) {
+          sum = sum + Number(input.charAt(i));
+        };
+        j++;
+      }
+
+      window.alert(sum);
+    }
+  </script>
+
+</body>
+
+</html>
