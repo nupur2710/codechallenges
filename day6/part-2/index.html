@@ -1,0 +1,72 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+  <form>
+    Number: <textarea type="text" name="input" rows="70" cols="50"></textarea><br>
+    <button value="Submit">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        compare($("textarea").val());
+
+      });
+    });
+
+    function compare(input) {
+      var max, maxIndex, totalLength, globalArray = [], infinite = false;
+      var finalArray = input.replace(/\s/g, ',').split(',').map(function (item) {
+        return Number(item);
+      });;
+      console.log("input array : " + finalArray);
+      i = 0;
+      while (true) {
+        i++;
+        var tempArray = sort(finalArray);
+        globalArray.push(tempArray.slice());
+        for (var j = 0; j <= i; j++) {
+          if (j != (i - 1) && JSON.stringify(globalArray[j]) === JSON.stringify(globalArray[i - 1])) {
+            infinite = true;
+            break;
+          }
+        }
+
+        if (infinite) {
+          break;
+        }
+      }
+      console.log("final global array: " + globalArray);
+      console.log("number of cycles between repetetions: " + (i - 1 - j))
+      console.log("total iterations: " + i);
+    }
+
+    function sort(finalArray) {
+      max = Math.max(...finalArray);
+      maxIndex = finalArray.indexOf(max);
+      finalArray[maxIndex] = 0;
+      insideIndex = maxIndex;
+      for (var i = 1; i <= max; i++) {
+        insideIndex++;
+        if (insideIndex > finalArray.length - 1) {
+          insideIndex = 0;
+        }
+        finalArray[insideIndex] = finalArray[insideIndex] + 1;
+        if (insideIndex === finalArray.length - 1) {
+          insideIndex = -1;
+        }
+      }
+      console.log(finalArray);
+      return (finalArray);
+    }
+  </script>
+
+</body>
+
+</html>
