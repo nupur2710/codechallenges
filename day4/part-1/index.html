@@ -1,0 +1,66 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+  <form>
+    Number: <textarea type="text" name="fname" rows="100" cols="100"></textarea><br>
+    <button value="Submit">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("button").click(function () {
+        compare($("textarea").val());
+
+      });
+    });
+
+    function compare(input) {
+
+     var ng =  input.split('\n').map((s) => s.split(/\s+/)).filter((a) => !a.some((s, i) => a.find((f, j) => i !== j && f === s))).length;
+      var array = input.split('\n');
+      var finalArray = [], max, min, valid = 0, invalid = 0, invalidFlag = false; myArray = [];
+
+      for (var i = 0; i < array.length; i++) {
+        b = array[i].replace(/\s/g, ',');
+        c = b.split(',').map(function (item) {
+          return item;
+        });
+        finalArray.push(c);
+
+      }
+      console.log(finalArray);
+
+      for (var j = 0; j < finalArray.length; j++) {
+        myArray = finalArray[j];
+        for (var k = 0; k < myArray.length; k++) {
+          for (var l = 0; l < myArray.length; l++) {
+            if (k === l) {
+              continue;
+            }
+            if (myArray[k] === myArray[l]) {
+              invalidFlag = true;
+              invalid = invalid + 1;
+              break;
+            }
+          }
+          if (invalidFlag) {
+            invalidFlag = false;
+            break;
+          }
+        }
+      }
+      valid = finalArray.length - invalid;
+      window.alert(valid);
+
+    }
+  </script>
+
+</body>
+
+</html>
